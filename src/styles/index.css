@@ -1,0 +1,273 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #efefef;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 7px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main_container {
+  display: block;
+  position: relative;
+  flex: 1 1 0%;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+  height: 100%;
+  max-width: 790px;
+  margin: 0px auto;
+}
+
+.main_container header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  gap: 8px;
+  padding-block-start: 20px;
+  background-color: white;
+  min-height: 200px;
+  max-height: 575px;
+  /* height: 50%; */
+  z-index: 3;
+  box-sizing: border-box;
+  box-shadow: white 0px 0px 15px 15px;
+  vertical-align: baseline;
+}
+
+.main_container header .nav {
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  pointer-events: none;
+  background: radial-gradient(
+      circle at calc(35%) 55%,
+      rgba(0, 189, 255, 0.48),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at calc(65%) 55%,
+      rgba(42, 0, 255, 0.26),
+      transparent 35%
+    ),
+    transparent;
+  width: 100%;
+  min-width: 350px;
+}
+
+header .alice_container {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  z-index: 1;
+}
+
+header .alice_video {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: initial;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out 0s;
+}
+
+header .alice_content {
+  overflow: hidden;
+  background-color: rgb(229, 229, 229);
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  z-index: 0;
+}
+
+header .alice_content::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: 2s ease 0s infinite normal none running animation-b85noa;
+}
+
+.chat_list {
+  position: relative;
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 16px;
+  gap: 10px;
+  overflow: auto;
+  bottom: 0px;
+  transition: bottom 0.25s ease-in-out 0s;
+}
+
+.message {
+  max-width: 85%;
+  padding: 15px;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: pre-wrap;
+  line-height: 120%;
+}
+
+.reply-msg {
+  background: rgb(241, 242, 246);
+  border-radius: 16px 16px 16px 4px;
+  color: rgb(60, 60, 60);
+  margin: 0px auto 0px 0px;
+}
+
+.self-msg {
+  background: rgb(116, 89, 254);
+  border-radius: 16px 16px 4px 16px;
+  color: rgb(255, 254, 253);
+  margin: 0px 0px 0px auto;
+}
+
+.message:first-of-type {
+  margin-top: auto;
+}
+
+.input-container {
+  opacity: 1;
+  transition: opacity 0.05s ease-in-out 0s;
+  display: flex;
+  padding: 10px 10px 20px;
+  gap: 10px;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.input-container .btn {
+  display: block;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 100vh;
+}
+
+.input-container .mic-btn {
+  background: url(../assets/mic.svg) center center no-repeat rgb(116, 89, 254);
+}
+
+.input-container .send-btn {
+  background: url(../assets/send.svg) center center no-repeat rgb(116, 89, 254);
+}
+
+.input-container .btn:disabled {
+  background-color: rgb(241, 242, 246);
+}
+
+.input-container .input-main {
+  position: relative;
+  flex: 1 1 0%;
+  color: black;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container .input-field {
+  display: inline-block;
+  border: 1px solid rgb(192, 191, 189);
+  border-radius: 20px;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  min-height: 50px;
+  max-height: 100px;
+  overflow: auto;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.input-container .input-field:focus,
+.input-container .input-field:focus-visible {
+  outline: none !important;
+}
+
+.input-container .limit {
+  color: rgb(60, 60, 60);
+  font-size: 12px;
+  position: absolute;
+  right: 8px;
+  bottom: -22px;
+}
+
+.input-container .error-div {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  transform: translateY(-50%);
+  max-width: 80%;
+  background: rgb(255, 255, 255);
+  padding: 0px 5px;
+  font-size: 0.8rem;
+  color: rgb(252, 85, 85);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.input-container .listner-div {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(252, 85, 85);
+  font-size: 12px;
+  position: absolute;
+  left: 0px;
+  bottom: -22px;
+}
