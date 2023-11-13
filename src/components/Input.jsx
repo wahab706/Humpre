@@ -35,16 +35,16 @@ export function Input(props) {
   };
 
   // =========Speech To Text=============
-  useEffect(() => {
-    // we have to run startListening fucnction once to check
-    // isMicrophoneAvailable available or not, then instantly we run stopListening
-    setTimeout(() => {
-      SpeechRecognition.startListening();
-    }, 100);
-    setTimeout(() => {
-      SpeechRecognition.stopListening();
-    }, 300);
-  }, []);
+//   useEffect(() => {
+//     // we have to run startListening fucnction once to check
+//     // isMicrophoneAvailable available or not, then instantly we run stopListening
+//     setTimeout(() => {
+//       SpeechRecognition.startListening();
+//     }, 100);
+//     setTimeout(() => {
+//       SpeechRecognition.stopListening();
+//     }, 300);
+//   }, []);
 
   const startListening = () => {
     setTimeout(() => {
