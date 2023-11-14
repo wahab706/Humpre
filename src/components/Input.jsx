@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { listenIcon } from "./Const";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -6,6 +6,7 @@ import SpeechRecognition, {
 
 export function Input(props) {
   //   const { value, setValue, listening, setListening } = props;
+  const { messagesList, setMessagesList } = props;
 
   const {
     transcript,
@@ -22,9 +23,41 @@ export function Input(props) {
     setValue(e.target.value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && value) {
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = () => {
     if (value && !listening) {
       console.log("send chat message");
+
+      // this is just for dummy messages
+      let message1 = {
+        id: messagesList.length + 1,
+        content: value,
+        type: "text",
+        url: "",
+        owner: true,
+      };
+
+      let message2 = {
+        id: messagesList.length + 2,
+        content: "Greetings",
+        type: "text",
+        url: "",
+        owner: false,
+      };
+
+      setValue("");
+      setTimeout(() => {
+        setMessagesList((prevMessages) => [
+          ...prevMessages,
+          message1,
+          message2,
+        ]);
+      }, 700);
     } else {
       if (listening) {
         stopListening();
@@ -35,20 +68,19 @@ export function Input(props) {
   };
 
   // =========Speech To Text=============
-//   useEffect(() => {
-//     // we have to run startListening fucnction once to check
-//     // isMicrophoneAvailable available or not, then instantly we run stopListening
-//     setTimeout(() => {
-//       SpeechRecognition.startListening();
-//     }, 100);
-//     setTimeout(() => {
-//       SpeechRecognition.stopListening();
-//     }, 300);
-//   }, []);
+  //   useEffect(() => {
+  //     // we have to run startListening fucnction once to check
+  //     // isMicrophoneAvailable available or not, then instantly we run stopListening
+  //     setTimeout(() => {
+  //       SpeechRecognition.startListening();
+  //     }, 100);
+  //     setTimeout(() => {
+  //       SpeechRecognition.stopListening();
+  //     }, 300);
+  //   }, []);
 
   const startListening = () => {
     setTimeout(() => {
-      console.log("isMicrophoneAvailable", isMicrophoneAvailable);
       if (!isMicrophoneAvailable) {
         alert("Please allow Microphone access");
         return;
@@ -63,12 +95,10 @@ export function Input(props) {
   };
 
   const stopListening = () => {
-    console.log("stopListening called");
     SpeechRecognition.stopListening();
   };
 
   const resetTranscription = () => {
-    console.log("resetTranscript called");
     resetTranscript();
     setTimeout(() => {
       SpeechRecognition.stopListening();
@@ -76,12 +106,10 @@ export function Input(props) {
   };
 
   const onTouchStart = () => {
-    console.log("onTouchStart called");
     handleSubmit();
   };
 
   const onTouchEnd = () => {
-    console.log("onTouchEnd called");
     handleSubmit();
   };
 
@@ -116,6 +144,7 @@ export function Input(props) {
           maxLength="350"
           value={value}
           disabled={listening}
+          onKeyDown={handleKeyDown}
           onChange={handleChange}
           className="input-field"
         />
@@ -127,7 +156,6 @@ export function Input(props) {
         className={`btn hidden sm:block ${
           value && !listening ? "send-btn" : "mic-btn"
         }`}
-        // disabled={!value && !isMicrophoneAvailable}
         disabled={!value && !browserSupportsSpeechRecognition}
         onClick={handleSubmit}
       />
@@ -137,10 +165,9 @@ export function Input(props) {
         className={`btn block sm:hidden ${
           value && !listening ? "send-btn" : "mic-btn"
         }`}
-        // disabled={!value && !isMicrophoneAvailable}
         disabled={!value && !browserSupportsSpeechRecognition}
         onTouchStart={onTouchStart}
-        onTouchEnd={listening && onTouchEnd}
+        onTouchEnd={listening ? onTouchEnd : () => {}}
       />
     </div>
   );

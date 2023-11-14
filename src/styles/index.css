@@ -152,7 +152,7 @@ header .alice_content::after {
 }
 
 .message {
-  max-width: 85%;
+  max-width: 60%;
   padding: 15px;
   box-sizing: border-box;
   word-break: break-word;
@@ -172,6 +172,25 @@ header .alice_content::after {
   border-radius: 16px 16px 4px 16px;
   color: rgb(255, 254, 253);
   margin: 0px 0px 0px auto;
+}
+
+.video {
+  /* background: rgb(241, 242, 246); */
+  margin: 0px auto 0px 0px;
+  max-width: 85%;
+  padding: 4px;
+  /* border-radius: 100%; */
+  height: 100%;
+}
+
+.msg_video {
+  width: 220px;
+  height: 220px;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  /* object-fit: initial; */
+  transition: opacity 0.5s ease-in-out 0s;
 }
 
 .message:first-of-type {
@@ -208,6 +227,10 @@ header .alice_content::after {
   background-color: rgb(241, 242, 246);
 }
 
+.input-container .btn:focus-visible {
+  outline: none !important;
+}
+
 .input-container .input-main {
   position: relative;
   flex: 1 1 0%;
@@ -232,7 +255,6 @@ header .alice_content::after {
   white-space: pre-wrap;
 }
 
-.input-container .input-field:focus,
 .input-container .input-field:focus-visible {
   outline: none !important;
 }
@@ -277,6 +299,5 @@ header .alice_content::after {
   outline: none;
   overflow: hidden;
   width: 70px;
-    margin: 0px auto 0px 0px !important;
+  margin: 0px auto 0px 0px !important;
 }
-
