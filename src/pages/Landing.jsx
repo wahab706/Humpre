@@ -34,7 +34,7 @@ export function Landing() {
     },
   ];
 
-  const [messagesList, setMessagesList] = useState(messages);
+  const [messagesList, setMessagesList] = useState([]);
 
   // useEffect(() => {
   //   console.log('messagesList', messagesList);
