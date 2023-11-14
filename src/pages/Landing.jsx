@@ -24,17 +24,17 @@ export function Landing() {
     //   url: "",
     //   owner: true,
     // },
-    // { id: 9, content: "Greetings", type: "text", url: "", owner: true },
-    // {
-    //   id: 10,
-    //   content: "Greetings",
-    //   type: "video",
-    //   url: "https://chat.d-id.com/videos/prs_alice.idle.mp4",
-    //   owner: false,
-    // },
+    { id: 9, content: "Greetings", type: "text", url: "", owner: true },
+    {
+      id: 10,
+      content: "Greetings",
+      type: "video",
+      url: "https://chat.d-id.com/videos/prs_alice.idle.mp4",
+      owner: false,
+    },
   ];
 
-  const [messagesList, setMessagesList] = useState([]);
+  const [messagesList, setMessagesList] = useState(messages);
 
   // useEffect(() => {
   //   console.log('messagesList', messagesList);

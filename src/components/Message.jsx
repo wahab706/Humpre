@@ -10,7 +10,7 @@ export function Message({ message }) {
 
   return (
     <Fragment>
-      {/* {message.type == "video" ? (
+      {message.type == "video" ? (
         <div ref={ref} className={`video`}>
           <video
             // loop
@@ -33,14 +33,7 @@ export function Message({ message }) {
         >
           {message.content}
         </div>
-      )} */}
-
-      <div
-        ref={ref}
-        className={`message ${message.owner ? "self-msg" : "reply-msg"}`}
-      >
-        {message.content}
-      </div>
+      )}
     </Fragment>
   );
 }
