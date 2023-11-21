@@ -31,7 +31,7 @@ export function Input(props) {
   };
 
   const handleSubmit = () => {
-    if ((value && !listening) || !loading) {
+    if (value && !listening && !loading) {
       handleMessages(value, true);
       sendMessage(value);
       setValue("");
@@ -144,6 +144,12 @@ export function Input(props) {
     }
   }, [transcript]);
 
+  useEffect(() => {
+    if (!value && !listening && !loading) {
+      resetTranscript();
+    }
+  }, [value]);
+
   return (
     <div className="input-container">
       <div className="input-main">
@@ -164,7 +170,7 @@ export function Input(props) {
           minLength="0"
           maxLength="350"
           value={value}
-          disabled={listening}
+          disabled={listening || loading}
           onKeyDown={handleKeyDown}
           onChange={handleChange}
           className="input-field"
