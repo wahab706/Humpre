@@ -145,7 +145,7 @@ export function Input(props) {
   }, [transcript]);
 
   useEffect(() => {
-    if (!value && !listening && !loading) {
+    if (!value && !listening) {
       resetTranscript();
     }
   }, [value]);
