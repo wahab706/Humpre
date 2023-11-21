@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useRef } from "react";
-import alice from "../assets/alice.mp4";
+import React, { useEffect, useRef } from "react";
+import ReactPlayer from "react-player";
 
 export function Message({ message }) {
   const ref = useRef();
@@ -9,37 +9,27 @@ export function Message({ message }) {
   }, [message]);
 
   return (
-    <Fragment>
-      {/* {message.type == "video" ? (
-        <div ref={ref} className={`video`}>
-          <video
-            // loop
-            // autoPlay
-            // muted
-            // preload="yes"
-            controls
-            playsInline
-            x-webkit-airplay="allow"
-            controlsList="nodownload"
-            className="msg_video"
-            // src={alice}
-            src={message.url}
-          ></video>
-        </div>
+    <div
+      ref={ref}
+      className={`message ${message.owner ? "self-msg" : "reply-msg"} ${
+        message.isError && "border border-red-300 !bg-transparent"
+      } ${message.type == "video" && "!bg-transparent !p-0 !-ml-1.5"} `}
+    >
+      {message.owner || message.type == "text" ? (
+        <span className={`${message.isError && "text-red-400 "}`}>
+          {message.content}
+        </span>
       ) : (
-        <div
-          ref={ref}
-          className={`message ${message.owner ? "self-msg" : "reply-msg"}`}
-        >
-          {message.content}
-        </div>
-      )} */}
-      <div
-          ref={ref}
-          className={`message ${message.owner ? "self-msg" : "reply-msg"}`}
-        >
-          {message.content}
-        </div>
-    </Fragment>
+        <video
+          preload="yes"
+          controls
+          playsInline
+          x-webkit-airplay="allow"
+          controlsList="nodownload"
+          className="msg_video"
+          src={message.content}
+        />
+      )}
+    </div>
   );
 }

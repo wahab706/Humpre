@@ -1,18 +1,20 @@
 import React, { Fragment } from "react";
-import { Message } from "./Message";
+import { Message, Loader } from "../components";
 
 export function Messages(props) {
-  const { messages } = props;
+  const { messages, loading } = props;
 
-  if (!messages?.length) {
+  if (!messages?.length && !loading) {
     return null;
   }
 
   return (
     <Fragment>
-      {messages?.map((message) => (
-        <Message key={message.id} message={message} />
+      {messages?.map((message, index) => (
+        <Message key={index} message={message} />
       ))}
+
+      {loading && <Loader />}
     </Fragment>
   );
 }

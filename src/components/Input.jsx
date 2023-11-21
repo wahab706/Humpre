@@ -1,12 +1,13 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { listenIcon } from "./Const";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import axios from "axios";
 
 export function Input(props) {
-  //   const { value, setValue, listening, setListening } = props;
-  const { messagesList, setMessagesList } = props;
+  const { messagesList, setMessagesList, loading, setLoading } = props;
+  const BASE_URL = "http://127.0.0.1:8000/api/convert-videos/";
 
   const {
     transcript,
@@ -30,34 +31,10 @@ export function Input(props) {
   };
 
   const handleSubmit = () => {
-    if (value && !listening) {
-      console.log("send chat message");
-
-      // this is just for dummy messages
-      let message1 = {
-        id: messagesList.length + 1,
-        content: value,
-        type: "text",
-        url: "",
-        owner: true,
-      };
-
-      let message2 = {
-        id: messagesList.length + 2,
-        content: "Greetings",
-        type: "text",
-        url: "",
-        owner: false,
-      };
-
+    if ((value && !listening) || !loading) {
+      handleMessages(value, true);
+      sendMessage(value);
       setValue("");
-      setTimeout(() => {
-        setMessagesList((prevMessages) => [
-          ...prevMessages,
-          message1,
-          message2,
-        ]);
-      }, 700);
     } else {
       if (listening) {
         stopListening();
@@ -65,6 +42,50 @@ export function Input(props) {
         startListening();
       }
     }
+  };
+
+  const sendMessage = async (value) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${BASE_URL}`,
+        {
+          text: value,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.data?.message == "success") {
+        handleMessages(response.data, false);
+      } else {
+        handleMessages(error, false, true);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.warn("Api Error", error);
+      setLoading(false);
+      handleMessages(error, false, true);
+    }
+  };
+
+  const handleMessages = (data, self, isError) => {
+    let message = {
+      id: messagesList.length + 1,
+      content: self
+        ? data
+        : isError
+        ? "Something went wrong! try again."
+        : data.video_url,
+      isError: self ? false : isError ? true : false,
+      type: self ? "text" : isError ? "text" : "video",
+      owner: self ? true : false,
+    };
+
+    setMessagesList((prevMessages) => [...prevMessages, message]);
   };
 
   // =========Speech To Text=============
@@ -156,7 +177,7 @@ export function Input(props) {
         className={`btn hidden sm:block ${
           value && !listening ? "send-btn" : "mic-btn"
         }`}
-        disabled={!value && !browserSupportsSpeechRecognition}
+        disabled={loading || (!value && !browserSupportsSpeechRecognition)}
         onClick={handleSubmit}
       />
 
@@ -165,7 +186,7 @@ export function Input(props) {
         className={`btn block sm:hidden ${
           value && !listening ? "send-btn" : "mic-btn"
         }`}
-        disabled={!value && !browserSupportsSpeechRecognition}
+        disabled={loading || (!value && !browserSupportsSpeechRecognition)}
         onTouchStart={onTouchStart}
         onTouchEnd={listening ? onTouchEnd : () => {}}
       />
