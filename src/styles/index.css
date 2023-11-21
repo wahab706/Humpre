@@ -102,12 +102,12 @@ header .alice_container {
 }
 
 header .alice_video {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   border-radius: 100%;
   display: block;
   aspect-ratio: 1 / 1;
-  object-fit: initial;
+  object-fit: cover;
   z-index: 2;
   opacity: 1;
   transition: opacity 0.5s ease-in-out 0s;

@@ -6,7 +6,8 @@ import SpeechRecognition, {
 import axios from "axios";
 
 export function Input(props) {
-  const { messagesList, setMessagesList, loading, setLoading } = props;
+  const { messagesList, setMessagesList, loading, setLoading, setVideoSrc } =
+    props;
   const BASE_URL = "http://127.0.0.1:8000/api/convert-videos/";
 
   const {
@@ -60,7 +61,8 @@ export function Input(props) {
       );
 
       if (response.data?.message == "success") {
-        handleMessages(response.data, false);
+        // handleMessages(response.data, false);
+        setVideoSrc(response.data?.video_url);
       } else {
         handleMessages(error, false, true);
       }

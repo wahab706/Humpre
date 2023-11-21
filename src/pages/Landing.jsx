@@ -4,12 +4,14 @@ import { Messages, Input, Header, InitialChat } from "../components";
 export function Landing() {
   const [messagesList, setMessagesList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(null);
+  // const [videoSrc, setVideoSrc] = useState("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
 
   return (
     <div className="flex h-screen pb-6">
       <div className="main_container">
         <div className="flex flex-col h-full">
-          <Header />
+          <Header videoSrc={videoSrc} />
 
           <div className="chat_list">
             <InitialChat />
@@ -21,6 +23,7 @@ export function Landing() {
             setMessagesList={setMessagesList}
             loading={loading}
             setLoading={setLoading}
+            setVideoSrc={setVideoSrc}
           />
         </div>
       </div>
