@@ -107,7 +107,7 @@ header .alice_container {
   border-radius: 100%;
   display: block;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  /* object-fit: cover; */
   z-index: 2;
   opacity: 1;
   transition: opacity 0.5s ease-in-out 0s;

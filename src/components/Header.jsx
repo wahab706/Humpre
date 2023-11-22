@@ -95,7 +95,7 @@ export function Header({ videoSrc }) {
                 onEnded={handleVideoEnded}
                 onDoubleClick={handleDoubleClick}
                 className={`cursor-pointer alice_video ${
-                  isFullscreen ? "!rounded-none" : "rounded-full"
+                  isFullscreen ? "!rounded-none" : "rounded-full object-cover"
                 }`}
               />
 
