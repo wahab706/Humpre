@@ -63,10 +63,13 @@ export function Input(props) {
       if (response.data?.message == "success") {
         // handleMessages(response.data, false);
         setVideoSrc(response.data?.video_url);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
       } else {
         handleMessages(error, false, true);
+        setLoading(false);
       }
-      setLoading(false);
     } catch (error) {
       console.warn("Api Error", error);
       setLoading(false);

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import ReactPlayer from "react-player";
 
 export function Message({ message }) {
   const ref = useRef();

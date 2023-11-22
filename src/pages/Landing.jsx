@@ -5,7 +5,6 @@ export function Landing() {
   const [messagesList, setMessagesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(null);
-  // const [videoSrc, setVideoSrc] = useState("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
 
   return (
     <div className="flex h-screen pb-6">

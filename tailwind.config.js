@@ -14,9 +14,12 @@ export default {
       },
       colors: {
         lightGray: '#E0E0E0',
-        bgColor: '#F0F0F0'
+        bgColor: '#F0F0F0',
+        darkBlue: '#7459FE',
       },
-      textColor:{},
+      textColor:{
+        
+      },
       backgroundColor:{
         darkGray: "#f5f5f5"
       },

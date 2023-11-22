@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import logo from "../assets/d-idLogo.svg";
 import addIcon from "../assets/addIcon.svg";
 import alice from "../assets/alice.mp4";
+import { PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 
 export function Header({ videoSrc }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -80,22 +81,32 @@ export function Header({ videoSrc }) {
 
         <div className="alice_container">
           {videoSrc ? (
-            <video
-              // controls
-              autoPlay
-              preload="yes"
-              playsInline
-              x-webkit-airplay="allow"
-              controlsList="nodownload"
-              id="aliceVideo"
-              src={videoSrc}
-              onClick={handleTogglePlay}
-              onEnded={handleVideoEnded}
-              onDoubleClick={handleDoubleClick}
-              className={`cursor-pointer alice_video ${
-                isFullscreen ? "!rounded-none" : "rounded-full"
-              }`}
-            />
+            <Fragment>
+              <video
+                // controls
+                autoPlay
+                preload="yes"
+                playsInline
+                x-webkit-airplay="allow"
+                controlsList="nodownload"
+                id="aliceVideo"
+                src={videoSrc}
+                onClick={handleTogglePlay}
+                onEnded={handleVideoEnded}
+                onDoubleClick={handleDoubleClick}
+                className={`cursor-pointer alice_video ${
+                  isFullscreen ? "!rounded-none" : "rounded-full"
+                }`}
+              />
+
+              <div className="play-icon-container" onClick={handleTogglePlay}>
+                {isPlaying ? (
+                  <PauseCircleIcon className="text-darkBlue" />
+                ) : (
+                  <PlayCircleIcon className="text-darkBlue" />
+                )}
+              </div>
+            </Fragment>
           ) : (
             <video
               loop
