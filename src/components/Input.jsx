@@ -83,7 +83,9 @@ export function Input(props) {
       content: self
         ? data
         : isError
-        ? "Something went wrong! try again."
+        ? data?.response?.status == 400
+          ? "Max attempts reached. try again after 1 minute."
+          : "Something went wrong! try again."
         : data.video_url,
       isError: self ? false : isError ? true : false,
       type: self ? "text" : isError ? "text" : "video",
@@ -175,7 +177,7 @@ export function Input(props) {
           minLength="0"
           maxLength="350"
           value={value}
-          disabled={listening || loading}
+          disabled={listening || loading }
           onKeyDown={handleKeyDown}
           onChange={handleChange}
           className="input-field"
