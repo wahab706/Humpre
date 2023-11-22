@@ -98,7 +98,6 @@ export function Header({ videoSrc }) {
                   isFullscreen ? "!rounded-none" : "rounded-full object-cover"
                 }`}
               />
-
               <div className="play-icon-container" onClick={handleTogglePlay}>
                 {isPlaying ? (
                   <PauseCircleIcon className="text-darkBlue" />
